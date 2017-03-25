@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<body>
+<div id="signinButton">
+<span class = "g-signin" 
+	data-scope = "openid"
+	data-clientid = "192157670298-e41j46td79vpj761m50v54bdncd26ke3.apps.googleusercontent.com"
+	data-redirecturi = "postmessage"
+	data-accesstype = "offline"
+	data-cookiepolicy = "single_host_origins"
+	data-callback = "signInCallback"
+	data-approvalprompt = "force">
+</span>
+</div>
+<div id="result"></div>
+<script>
+function signInCallback(authResult){
+	if(authResult['code']){
+		//Hide the sign-in button now that the user is authorized,
+		$('#signinButton').attr('style','display: none');
+		/* Send the one-time-use code to the user, if the server
+		responds, write a 'login succesful' message to the web page
+		and then redirect to the restaurants page*/
+		$ajax({
+			type: 'POST',
+			url: '/gconnect?state={{STATE}}',
+			processData = false,
+			contentType: 'application/octet-stream; charset=utf-8',
+			data: authResult['code'],
+			success: function(result){
+				if (result){
+					$('#result').html('Login Succesful!</br>' + result + '</br>Redirecting...')
+					setTimeout(function(){
+						window.location.href = "/restaurants";
+					},4000);
+				} else if (authResult['error']){
+					console.log('There was an error: ' + authResult['error']);
+				}
+			}
+
+		})
+	}
+
+}
+
+</script>
+</body>
+</html>
+{% endblock %}

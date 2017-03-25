@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<body>
+	<h1>Restaurants</h1>
+	{% for r in restaurants %}
+	<a href="{{url_for('restaurantMenu', restaurant_id=r.id)}}">{{r.name}}</a>
+	<br>
+	<a href="{{url_for('editRestaurant',restaurant_id = r.id)}}">Edit</a>
+	<form action="{{url_for('deleteRestaurant', restaurant_id=r.id)}}"
+	method = 'POST'>
+		<input type = 'submit' value = 'Delete'>
+	</form>
+	</br>
+	{% endfor %}
+	<a href="{{url_for('newRestaurant')}}">New Restaurant</a>
+
+</body>
+</html>
+{% endblock %}
