@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<body>
+<a href="{{url_for('restaurants')}}">Back</a>
+	<div class="row banner menu">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ restaurant.name }}
+			<figure class="user">
+				<img src="{{ user.picture}}">
+				<figcaption>{{ user.name }}</figcaption>
+			</figure>
+			</h1>
+
+		</div>
+	</div>
+	{% if items !=[] %}	
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<h2>Appetizers</h2>
+					{% for i in items %}
+						{% if i.course == 'Appetizer' %}
+							<div class="menu-item">
+								<h3>{{i.name}}</h3>
+								<p>{{i.description}}</p>
+								<p class="menu-price">{{i.price}}</p>
+									</br>
+								<a href="{{url_for('editMenuItem',restaurant_id = restaurant.id, menu_id=i.id)}}">Edit</a>
+								<form action="{{url_for('deleteMenuItem', restaurant_id=restaurant_id,menu_id=i.id)}}"
+								method = 'POST'>
+									<input type = 'submit' value = 'Delete'>
+								</form>
+							</div>
+						{% endif %}
+					{% endfor %}
+			</div>
+			<div class="col-md-4">			
+				<h2>Entrees</h2>
+					{% for i in items %}
+						{% if i.course == 'Entree' %}
+						<div class="menu-item">
+							<h3>{{i.name}}</h3>
+							<p>{{i.description}}</p>
+							<p class="menu-price">{{i.price}}</p>
+								</br>
+							<a href="{{url_for('editMenuItem',restaurant_id = restaurant.id, menu_id=i.id)}}">Edit</a>
+							<form action="{{url_for('deleteMenuItem', restaurant_id=restaurant_id,menu_id=i.id)}}"
+							method = 'POST'>
+								<input type = 'submit' value = 'Delete'>
+							</form>
+						</div>
+						{% endif %}
+					{% endfor %}
+			</div>
+			<div class="col-md-3">
+				<h2>Desserts</h2>
+					{% for i in items %}
+						{% if i.course == 'Dessert' %}
+						<div class="menu-item">
+							<h3>{{i.name}}</h3>
+							<p>{{i.description}}</p>
+							<p class="menu-price">{{i.price}}</p>
+								</br>
+							<a href="{{url_for('editMenuItem',restaurant_id = restaurant.id, menu_id=i.id)}}">Edit</a>
+							<form action="{{url_for('deleteMenuItem', restaurant_id=restaurant_id,menu_id=i.id)}}"
+							method = 'POST'>
+								<input type = 'submit' value = 'Delete'>
+							</form>
+						</div>
+						{% endif %}
+					{% endfor %}
+				<h2>Beverages</h2>
+					{% for i in items %}
+						{% if i.course == 'Beverage' %}
+						<div class="menu-item">
+							<h3>{{i.name}}</h3>
+							<p>{{i.description}}</p>
+							<p class="menu-price">{{i.price}}</p>
+							</br>
+							<a href="{{url_for('editMenuItem',restaurant_id = restaurant.id, menu_id=i.id)}}">Edit</a>
+							<form action="{{url_for('deleteMenuItem', restaurant_id=restaurant_id,menu_id=i.id)}}"
+							method = 'POST'>
+								<input type = 'submit' value = 'Delete'>
+							</form>	
+						</div>
+						{% endif %}
+					{% endfor %}
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	{% endif %}	
+	
+	<br>
+	<a href="{{url_for('newMenuItem',restaurant_id = restaurant.id)}}">New Menu Item</a>
+	<br>
+</body>
+</html>
+{% endblock %}
