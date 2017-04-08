@@ -5,6 +5,7 @@
 <body>
 	<h1>Restaurants</h1>
 	{% for r in restaurants %}
+	<br>
 	<a href="{{url_for('restaurantMenu', restaurant_id=r.id)}}">{{r.name}}</a>
 	<br>
 		{% if user.id  == r.user_id %}
@@ -16,9 +17,8 @@
 		</br>
 		{% endif %}
 	{% endfor %}
+	<br><br>
 	<a href="{{url_for('newRestaurant')}}">New Restaurant</a>
-	
-
 </body>
 </html>
 {% endblock %}

@@ -23,3 +23,4 @@ Ensure that your Flask version is correct:
 2. pip install flask==0.9
 3. pip install Flask-Login==0.1.3
 
+
